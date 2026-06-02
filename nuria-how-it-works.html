@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>つくり方 | Nuria</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Noto+Sans+JP:wght@300;400;500&family=DM+Mono:wght@300;400&family=Klee+One:wght@400;600&display=swap');
+
+:root {
+  --cream: #F5F0E8; --warm: #EDE5D8; --paper: #FAF7F2;
+  --ink: #1E1A14; --muted: #8A7E6E; --line: #D8CFC0;
+  --terra: #B86A3C; --sage: #6A8C6A; --dust: #8C7A5A;
+  --salmon: #E8957A; --bg: #F9F1E3;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--cream); color: var(--ink); font-family: 'Noto Sans JP', sans-serif; line-height: 1.8; overflow-x: hidden; }
+
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  padding: 8px 48px; display: flex; align-items: center; justify-content: space-between;
+  background: #F9F1E3;
+}
+.nav-logo img { height: 80px; width: auto; display: block; }
+.nav-logo { text-decoration: none; }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--ink); }
+
+.wrap { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+
+/* HERO */
+.hero { padding: 160px 24px 80px; text-align: center; border-bottom: 1px solid var(--line); }
+.hero-eye { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s; }
+.hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px,7vw,72px); font-weight: 300; font-style: italic; line-height: 1.1; letter-spacing: -1px; margin-bottom: 20px; opacity: 0; animation: fadeUp 0.8s ease forwards 0.4s; }
+.hero-sub { font-size: 14px; color: var(--muted); font-weight: 300; max-width: 520px; margin: 0 auto; line-height: 2; opacity: 0; animation: fadeUp 0.8s ease forwards 0.6s; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+
+/* OVERVIEW STRIP */
+.overview { padding: 80px 0; border-bottom: 1px solid var(--line); background: var(--bg); }
+.overview-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1px; background: var(--line); }
+.overview-item { background: var(--bg); padding: 40px 32px; text-align: center; }
+.ov-num { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 4px; color: var(--terra); text-transform: uppercase; margin-bottom: 16px; }
+.ov-icon { font-size: 36px; margin-bottom: 16px; }
+.ov-title { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 300; font-style: italic; margin-bottom: 10px; }
+.ov-desc { font-size: 12px; color: var(--muted); line-height: 1.9; }
+
+/* STEPS */
+.steps { padding: 120px 0; }
+.step-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 5px; text-transform: uppercase; color: var(--terra); margin-bottom: 60px; text-align: center; }
+
+.step-block { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-bottom: 120px; }
+.step-block.reverse { direction: rtl; }
+.step-block.reverse > * { direction: ltr; }
+
+.step-visual { position: relative; }
+.step-img-box {
+  background: var(--warm);
+  aspect-ratio: 4/3;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; position: relative;
+}
+.step-img-box .placeholder-art { width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; }
+
+/* Step visuals as CSS art */
+.art-photo { background: linear-gradient(135deg, #c9b8a0 0%, #e8d4b8 50%, #d4c4a8 100%); position: relative; }
+.art-photo::after { content: '📸'; font-size: 64px; position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%); }
+
+.art-ai { background: linear-gradient(135deg, #f0ebe0 0%, #e8dfd0 100%); position: relative; }
+.art-ai-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; width: 80%; height: 80%; }
+.art-ai-card { background: white; display: flex; align-items: center; justify-content: center; font-size: 28px; opacity: 0.9; }
+
+.art-robot { background: linear-gradient(135deg, #e8ede8 0%, #d8e0d8 100%); position: relative; display: flex; align-items: center; justify-content: center; }
+.robot-svg { width: 60%; opacity: 0.7; }
+
+.art-kit { background: var(--cream); position: relative; }
+.kit-contents { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; padding: 24px; width: 100%; }
+.kit-item { background: white; padding: 12px; text-align: center; font-size: 10px; font-family: 'DM Mono', monospace; color: var(--muted); letter-spacing: 1px; }
+.kit-item .kit-emoji { font-size: 24px; display: block; margin-bottom: 6px; }
+
+.art-paint { background: linear-gradient(135deg, #f5f0e8 0%, #ede5d8 100%); position: relative; }
+.paint-strokes { position: absolute; inset: 0; overflow: hidden; }
+
+.step-num-big { font-family: 'Cormorant Garamond', serif; font-size: 120px; font-weight: 300; color: rgba(30,26,20,0.06); position: absolute; top: -30px; left: -20px; line-height: 1; pointer-events: none; }
+
+.step-content { }
+.step-eyebrow { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 4px; text-transform: uppercase; color: var(--terra); margin-bottom: 16px; }
+.step-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px,4vw,42px); font-weight: 300; font-style: italic; line-height: 1.2; margin-bottom: 20px; letter-spacing: -0.5px; }
+.step-body { font-size: 14px; font-weight: 300; color: var(--muted); line-height: 2.1; margin-bottom: 24px; }
+.step-detail { background: var(--warm); padding: 20px 24px; font-size: 12px; color: var(--dust); line-height: 1.9; }
+.step-detail strong { color: var(--ink); font-weight: 500; }
+
+/* LINE FLOW */
+.line-section { padding: 100px 0; background: var(--bg); border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+.line-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px,4vw,44px); font-weight: 300; font-style: italic; text-align: center; margin-bottom: 12px; }
+.line-sub { text-align: center; font-size: 13px; color: var(--muted); margin-bottom: 60px; }
+
+.line-flow { display: flex; gap: 0; overflow-x: auto; padding-bottom: 12px; }
+.lf-step { flex: 0 0 200px; padding: 0 20px; border-right: 1px solid var(--line); text-align: center; }
+.lf-step:last-child { border-right: none; }
+.lf-num { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 3px; color: var(--terra); text-transform: uppercase; margin-bottom: 12px; }
+.lf-bubble { background: white; border-radius: 12px; padding: 14px 16px; font-size: 11px; line-height: 1.7; margin-bottom: 12px; box-shadow: 0 2px 12px rgba(30,26,20,0.06); text-align: left; }
+.lf-bubble.bot { border-radius: 0 12px 12px 12px; }
+.lf-bubble.user { background: #DCF8C6; border-radius: 12px 0 12px 12px; }
+.lf-label { font-size: 10px; color: var(--muted); }
+
+/* FAQ */
+.faq-section { padding: 100px 0; border-bottom: 1px solid var(--line); }
+.faq-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(28px,4vw,44px); font-weight: 300; font-style: italic; text-align: center; margin-bottom: 48px; }
+details { border-bottom: 1px solid var(--line); }
+summary { padding: 20px 0; cursor: pointer; font-size: 14px; font-weight: 400; list-style: none; display: flex; justify-content: space-between; align-items: center; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: '+'; font-family: monospace; font-size: 20px; color: var(--terra); transition: transform 0.2s; flex-shrink: 0; margin-left: 16px; }
+details[open] summary::after { content: '−'; }
+.faq-answer { padding: 0 0 24px; font-size: 13px; color: var(--muted); line-height: 2; max-width: 640px; }
+
+/* CTA */
+.cta-section { padding: 120px 0; text-align: center; }
+.cta-label { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 5px; text-transform: uppercase; color: var(--muted); margin-bottom: 24px; }
+.cta-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(32px,5vw,56px); font-weight: 300; font-style: italic; margin-bottom: 40px; line-height: 1.2; }
+.btn-primary { display: inline-block; background: var(--ink); color: var(--cream); padding: 16px 48px; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; transition: background 0.2s; }
+.btn-primary:hover { background: var(--terra); }
+
+footer { background: var(--ink); color: var(--muted); padding: 60px 48px 40px; }
+.footer-inner { max-width: 860px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; }
+.footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; font-style: italic; color: var(--cream); margin-bottom: 12px; }
+.footer-tagline { font-size: 12px; line-height: 1.9; }
+.footer-col-title { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--cream); margin-bottom: 16px; }
+.footer-links { list-style: none; }
+.footer-links li { margin-bottom: 8px; }
+.footer-links a { font-size: 12px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--cream); }
+.footer-bottom { max-width: 860px; margin: 40px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; font-size: 10px; font-family: 'DM Mono', monospace; letter-spacing: 1px; }
+
+/* Mobile */
+@media (max-width: 768px) {
+  nav { padding: 8px 20px; }
+  .nav-links { display: none; }
+  .step-block { grid-template-columns: 1fr; gap: 40px; }
+  .step-block.reverse { direction: ltr; }
+  .overview-grid { grid-template-columns: 1fr; }
+  .footer-inner { grid-template-columns: 1fr; }
+  .footer-bottom { flex-direction: column; gap: 8px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="nuria-about.html" class="nav-logo">
+    <img src="nuria-logo.png" alt="Nuria">
+  </a>
+  <ul class="nav-links">
+    <li><a href="nuria-about.html">About</a></li>
+    <li><a href="nuria-how-it-works.html" class="active">つくり方</a></li>
+    <li><a href="nuria-gallery.html">Gallery</a></li>
+    <li><a href="nuria-faq.html">FAQ</a></li>
+    <li><a href="nuria-order.html">Order</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <p class="hero-eye">How it works</p>
+  <h1 class="hero-title">写真を送るだけで、<br>あとはロボットが始める。</h1>
+  <p class="hero-sub">あなたがするのは、色を選んで手を動かすことだけ。<br>それが、Nuriaの体験です。</p>
+</section>
+
+<!-- OVERVIEW -->
+<section class="overview">
+  <div class="wrap">
+    <div class="overview-grid">
+      <div class="overview-item">
+        <p class="ov-num">Step 01 — 03</p>
+        <div class="ov-icon">📱</div>
+        <h3 class="ov-title">LINEで写真を送る</h3>
+        <p class="ov-desc">スマホから写真を1枚送るだけ。AIが3パターンのデザインを即座に提案します。</p>
+      </div>
+      <div class="overview-item">
+        <p class="ov-num">Step 04 — 05</p>
+        <div class="ov-icon">🤖</div>
+        <h3 class="ov-title">ロボットが描く</h3>
+        <p class="ov-desc">ペンプロッターがクーピーで線画と下塗りを描いた台紙を制作。数日でお届けします。</p>
+      </div>
+      <div class="overview-item">
+        <p class="ov-num">Step 06</p>
+        <div class="ov-icon">🎨</div>
+        <h3 class="ov-title">あなたが完成させる</h3>
+        <p class="ov-desc">届いた台紙に、同梱のクーピーで色を重ねていくだけ。ガイド通りに進めれば必ず完成します。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STEP DETAIL -->
+<section class="steps">
+  <div class="wrap">
+    <p class="step-label">Step by step</p>
+
+    <!-- STEP 1 -->
+    <div class="step-block">
+      <div class="step-visual">
+        <span class="step-num-big">01</span>
+        <div class="step-img-box" style="padding:0;"><img src="Nuria_Coloring_Kit_Flat_Lay_-_Golden_Retriever.png" alt="写真を選ぶ" style="width:100%;height:100%;object-fit:cover;"></div>
+      </div>
+      <div class="step-content">
+        <p class="step-eyebrow">Step 01</p>
+        <h2 class="step-title">好きな写真を<br>1枚選ぶ</h2>
+        <p class="step-body">家族写真、ペットの写真、子供の笑顔、記念日の一枚——どんな写真でも大丈夫です。主役が画面の中心にいる、明るめの写真が一番きれいに仕上がります。</p>
+        <div class="step-detail">
+          <strong>おすすめの写真</strong><br>
+          被写体が画面の50〜70%を占める / 自然光や柔らかい光 / 解像度1,000px以上
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 2 -->
+    <div class="step-block reverse">
+      <div class="step-visual">
+        <span class="step-num-big" style="left:auto;right:-20px;">02</span>
+        <div class="step-img-box" style="padding:0;"><img src="Nuria_Hands_Coloring_-_Child_Portrait.png" alt="AI変換" style="width:100%;height:100%;object-fit:cover;object-position:center top;"></div>
+      </div>
+      <div class="step-content">
+        <p class="step-eyebrow">Step 02</p>
+        <h2 class="step-title">LINEで送ると<br>AIが即変換</h2>
+        <p class="step-body">写真をLINEに送ると、AIが自動で線画とカラー版を生成。背景あり・なしの2パターン、計4枚が約1〜2分で届きます。</p>
+        <div class="step-detail">
+          <strong>選べるパターン</strong><br>
+          線画版（背景あり）/ 線画版（背景なし）/ カラー版（背景あり）/ カラー版（背景なし）
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 3 -->
+    <div class="step-block">
+      <div class="step-visual">
+        <span class="step-num-big">03</span>
+        <div class="step-img-box" style="padding:0;"><img src="Nuria_Coloring_Kit_Flat_Lay_-_Opened_Kit.png" alt="決済" style="width:100%;height:100%;object-fit:cover;"></div>
+      </div>
+      <div class="step-content">
+        <p class="step-eyebrow">Step 03</p>
+        <h2 class="step-title">台紙枚数を選んで<br>即決済</h2>
+        <p class="step-body">気に入ったパターンを選んだら、台紙の枚数を選択。すぐに決済リンクが届くので、そのまま購入できます。</p>
+        <div class="step-detail">
+          <strong>台紙オプション</strong><br>
+          標準1枚 / +1枚追加（+¥400）/ +2枚追加（+¥700）<br>
+          <span style="margin-top:8px;display:block;">練習したい方や、複数人で楽しみたい方には追加がおすすめ。</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 4 -->
+    <div class="step-block reverse">
+      <div class="step-visual">
+        <span class="step-num-big" style="left:auto;right:-20px;">04</span>
+        <div class="step-img-box" style="padding:0;"><img src="Nuria_Pen_Plotter_Drawing.png" alt="ロボットが描く" style="width:100%;height:100%;object-fit:cover;"></div>
+      </div>
+      <div class="step-content">
+        <p class="step-eyebrow">Step 04</p>
+        <h2 class="step-title">ロボットが<br>台紙を描く</h2>
+        <p class="step-body">ペンプロッター（描画ロボット）がクーピーペンシルを持って、輪郭線と下塗りを台紙に描きます。あなたが塗りやすいよう、完璧な下準備をしておきます。</p>
+        <div class="step-detail">
+          <strong>ロボットが描くもの</strong><br>
+          0.2〜0.5mmの3段階の輪郭線 / Nuria 5色の下塗り / ハッチングで影の表現
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 5 -->
+    <div class="step-block">
+      <div class="step-visual">
+        <span class="step-num-big">05</span>
+        <div class="step-img-box" style="background:var(--cream);">
+          <img src="Nuria_Coloring_Kit_Flat_Lay_-_Tabby_Cat.png" alt="Nuriaキット" style="width:100%;height:100%;object-fit:cover;">
+        </div>
+      </div>
+      <div class="step-content">
+        <p class="step-eyebrow">Step 05</p>
+        <h2 class="step-title">キットが届く</h2>
+        <p class="step-body">数日でお手元に届きます。開けた瞬間に完成見本と台紙が目に入るよう、梱包の順番まで設計しています。</p>
+        <div class="step-detail">
+          <strong>同梱物（基本キット）</strong><br>
+          線画台紙 / AI完成見本 / クーピーペンシル12本 / ガイドシート / ウェルカムカード
+        </div>
+      </div>
+    </div>
+
+    <!-- STEP 6 -->
+    <div class="step-block reverse">
+      <div class="step-visual">
+        <span class="step-num-big" style="left:auto;right:-20px;">06</span>
+        <div class="step-img-box" style="padding:0;"><img src="Nuria_Hands_Coloring_-_Golden_Retriever_Portrait.png" alt="塗る" style="width:100%;height:100%;object-fit:cover;object-position:center top;"></div>
+      </div>
+      <div class="step-content">
+        <p class="step-eyebrow">Step 06</p>
+        <h2 class="step-title">ガイド通りに<br>完成させる</h2>
+        <p class="step-body">同梱のガイドシートに従って5段階で色を重ねていくだけ。うまく塗ろうとしなくて大丈夫。ただ色を選んで、手を動かして、その時間を楽しんでください。</p>
+        <div class="step-detail">
+          <strong>完成したら</strong><br>
+          写真をLINEに送ると次回¥500クーポンをプレゼント。作品はNuriaのギャラリーに掲載させていただく場合があります（同意いただいた場合のみ）。
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- LINE FLOW -->
+<section class="line-section">
+  <div class="wrap">
+    <h2 class="line-title">LINEの流れ</h2>
+    <p class="line-sub">友達追加から決済まで、全部LINEで完結します。</p>
+    <div class="line-flow">
+      <div class="lf-step">
+        <p class="lf-num">01</p>
+        <div class="lf-bubble bot">友達追加ありがとうございます🎨 キットを選んでください。</div>
+        <p class="lf-label">友達追加後すぐ</p>
+      </div>
+      <div class="lf-step">
+        <p class="lf-num">02</p>
+        <div class="lf-bubble user">基本キットで！</div>
+        <div class="lf-bubble bot">写真を1枚送ってください📸</div>
+        <p class="lf-label">キット選択</p>
+      </div>
+      <div class="lf-step">
+        <p class="lf-num">03</p>
+        <div class="lf-bubble user">（写真を送信）</div>
+        <div class="lf-bubble bot">受け取りました！変換中です🤖（約1〜2分）</div>
+        <p class="lf-label">写真送信</p>
+      </div>
+      <div class="lf-step">
+        <p class="lf-num">04</p>
+        <div class="lf-bubble bot">4パターンできました！どれにしますか？<br><br>[ A：線画 ] [ B：カラー ]</div>
+        <p class="lf-label">AI変換完了</p>
+      </div>
+      <div class="lf-step">
+        <p class="lf-num">05</p>
+        <div class="lf-bubble user">B！</div>
+        <div class="lf-bubble bot">台紙の枚数は？<br>[1枚][+1枚][+2枚]</div>
+        <p class="lf-label">パターン選択</p>
+      </div>
+      <div class="lf-step">
+        <p class="lf-num">06</p>
+        <div class="lf-bubble bot">確定しました✨<br>決済リンクを送ります→<br>https://buy.stripe.com/...</div>
+        <p class="lf-label">即決済リンク</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ PREVIEW -->
+<section class="faq-section">
+  <div class="wrap">
+    <h2 class="faq-title">よくある質問</h2>
+    <details open>
+      <summary>どんな写真でも大丈夫ですか？</summary>
+      <p class="faq-answer">はい、ほとんどの写真に対応しています。人物・ペット・風景など被写体は問いません。ただし、解像度が低すぎるもの・顔が極端に小さいものは仕上がりに影響する場合があります。ご心配な場合はLINEでお気軽にご相談ください。</p>
+    </details>
+    <details>
+      <summary>届くまでどのくらいかかりますか？</summary>
+      <p class="faq-answer">決済完了後、通常3〜5営業日以内に発送いたします。レターパックライトでの配送となりますので、発送後2〜3日でお届け予定です。</p>
+    </details>
+    <details>
+      <summary>子供でも塗れますか？</summary>
+      <p class="faq-answer">はい、初級キットは小学生でも楽しめるよう設計されています。基本キットは中学生以上、上級キットは大人向けです。お子さまへのプレゼントには初級キットがおすすめです。</p>
+    </details>
+    <details>
+      <summary>クーピーペンシルは追加購入できますか？</summary>
+      <p class="faq-answer">Nuria専用の5色は市販のサクラクレパス「クーピーペンシル」では完全一致しませんが、近い色番号をLINEでご案内することができます。ご購入後にお気軽にお問い合わせください。</p>
+    </details>
+    <a href="nuria-faq.html" style="display:inline-block;margin-top:32px;font-family:'DM Mono',monospace;font-size:10px;letter-spacing:3px;text-transform:uppercase;color:var(--terra);text-decoration:none;border-bottom:1px solid var(--terra);padding-bottom:2px;">すべてのFAQを見る →</a>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta-section">
+  <div class="wrap" style="text-align:center;">
+    <p class="cta-label">Start your Nuria</p>
+    <h2 class="cta-title">ロボットが始めて、<br>あなたが完成させる。</h2>
+    <a href="nuria-order.html" class="btn-primary">キットを選ぶ</a>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Nuria</div>
+      <p class="footer-tagline">何もしなくていい時代に、<br>あえて手を動かす。<br>それが贅沢かもしれない。</p>
+    </div>
+    <div>
+      <p class="footer-col-title">Pages</p>
+      <ul class="footer-links">
+        <li><a href="nuria-about.html">About</a></li>
+        <li><a href="nuria-how-it-works.html">つくり方</a></li>
+        <li><a href="nuria-gallery.html">Gallery</a></li>
+        <li><a href="nuria-faq.html">FAQ</a></li>
+        <li><a href="nuria-order.html">Order</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">SNS</p>
+      <ul class="footer-links">
+        <li><a href="#">TikTok @nuria.art</a></li>
+        <li><a href="#">Instagram @nuria.art5</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Nuria. All rights reserved.</span>
+    <span>HAND-CRAFTED WITH ROBOT LOVE</span>
+  </div>
+</footer>
+
+</body>
+</html>

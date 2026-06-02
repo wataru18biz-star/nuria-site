@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About | Nuria</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Noto+Sans+JP:wght@300;400;500&family=DM+Mono:wght@300;400&family=Klee+One:wght@400;600&display=swap');
+
+:root {
+  --cream: #F5F0E8;
+  --warm: #EDE5D8;
+  --paper: #FAF7F2;
+  --ink: #1E1A14;
+  --muted: #8A7E6E;
+  --line: #D8CFC0;
+  --terra: #B86A3C;
+  --sage: #6A8C6A;
+  --dust: #8C7A5A;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Noto Sans JP', sans-serif;
+  line-height: 1.8;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 8px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #F9F1E3;
+  backdrop-filter: blur(12px);
+  border-bottom: none;
+  transition: all 0.3s;
+}
+
+.nav-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ink);
+  text-decoration: none;
+  letter-spacing: -0.5px;
+}
+
+.nav-links {
+  display: flex;
+  gap: 36px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.nav-links a:hover,
+.nav-links a.active { color: var(--ink); }
+
+/* ── HERO ── */
+.hero {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 120px 24px 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-bg {
+  position: absolute; inset: 0;
+  background-image: url('Nuria_Coloring_Kit_Flat_Lay_-_Golden_Retriever.png');
+  background-size: cover;
+  background-position: center;
+}
+
+.hero-bg::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: rgba(245,240,232,0.65);
+}
+
+.hero-eyebrow {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 32px;
+  position: relative;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.2s;
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(48px, 10vw, 96px);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.05;
+  letter-spacing: -2px;
+  color: var(--ink);
+  margin-bottom: 32px;
+  position: relative;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.4s;
+}
+
+.hero-title em {
+  color: var(--terra);
+  font-style: italic;
+}
+
+.hero-rule {
+  width: 1px;
+  height: 80px;
+  background: linear-gradient(to bottom, var(--line), transparent);
+  margin: 0 auto 40px;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 0.8s;
+}
+
+.hero-statement {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(18px, 2.5vw, 26px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--muted);
+  line-height: 1.6;
+  max-width: 600px;
+  margin: 0 auto;
+  opacity: 0;
+  animation: fadeUp 0.8s ease forwards 1s;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── SECTIONS ── */
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+
+/* ── STORY BLOCK ── */
+.story {
+  padding: 120px 0;
+  border-top: 1px solid var(--line);
+}
+
+.story-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 32px;
+}
+
+.story-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.2;
+  margin-bottom: 40px;
+  letter-spacing: -1px;
+}
+
+.story-body {
+  font-size: 15px;
+  font-weight: 300;
+  line-height: 2.1;
+  color: #4A4440;
+}
+
+.story-body p { margin-bottom: 28px; }
+.story-body p:last-child { margin-bottom: 0; }
+
+.story-body strong {
+  font-weight: 500;
+  color: var(--ink);
+}
+
+/* ── QUOTE ── */
+.quote-section {
+  padding: 100px 0;
+  background: var(--ink);
+  position: relative;
+  overflow: hidden;
+}
+
+.quote-section::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 50% at 30% 50%, rgba(184,106,60,0.1), transparent 60%);
+}
+
+.quote-wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 24px;
+  text-align: center;
+  position: relative;
+}
+
+.quote-mark {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 120px;
+  line-height: 0.5;
+  color: var(--terra);
+  opacity: 0.3;
+  margin-bottom: 24px;
+  display: block;
+}
+
+.quote-text {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(24px, 4vw, 40px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--cream);
+  line-height: 1.5;
+  margin-bottom: 32px;
+}
+
+.quote-text em { color: var(--terra); font-style: normal; }
+
+.quote-sub {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 4px;
+  color: rgba(245,240,232,0.3);
+}
+
+/* ── HOW ── */
+.how {
+  padding: 120px 0;
+  border-top: 1px solid var(--line);
+}
+
+.how-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 32px;
+}
+
+.how-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 300;
+  font-style: italic;
+  line-height: 1.2;
+  margin-bottom: 64px;
+  letter-spacing: -1px;
+}
+
+.steps {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 80px 1fr;
+  gap: 0;
+  position: relative;
+}
+
+.step:not(:last-child)::after {
+  content: '';
+  position: absolute;
+  left: 39px;
+  top: 64px;
+  bottom: 0;
+  width: 1px;
+  background: var(--line);
+}
+
+.step-num-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 8px;
+}
+
+.step-num {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: var(--warm);
+  border: 1px solid var(--line);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 18px;
+  font-style: italic;
+  color: var(--dust);
+  position: relative;
+  z-index: 1;
+  flex-shrink: 0;
+}
+
+.step-content {
+  padding: 4px 0 56px 24px;
+}
+
+.step-title {
+  font-size: 15px;
+  font-weight: 500;
+  margin-bottom: 8px;
+  color: var(--ink);
+}
+
+.step-body {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.8;
+  font-weight: 300;
+}
+
+.step-tag {
+  display: inline-block;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  padding: 3px 10px;
+  border-radius: 20px;
+  margin-top: 8px;
+}
+
+/* ── PHILOSOPHY ── */
+.philosophy {
+  padding: 120px 0;
+  background: var(--warm);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.phil-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 32px;
+}
+
+.phil-items {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.phil-item {
+  display: grid;
+  grid-template-columns: 40px 1fr;
+  gap: 24px;
+  align-items: start;
+}
+
+.phil-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--line);
+  line-height: 1;
+}
+
+.phil-content {}
+
+.phil-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 600;
+  font-style: italic;
+  margin-bottom: 10px;
+  color: var(--ink);
+}
+
+.phil-body {
+  font-size: 13px;
+  color: var(--muted);
+  line-height: 1.9;
+  font-weight: 300;
+}
+
+/* ── LETTER ── */
+.letter-section {
+  padding: 120px 0;
+  border-top: 1px solid var(--line);
+  background: #F0E8DA;
+}
+
+.letter-wrap {
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+.letter-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 48px;
+  text-align: center;
+}
+
+.letter-body {
+  font-size: 16px;
+  font-family: 'Klee One', cursive;
+  font-weight: 400;
+  line-height: 2.6;
+  color: #4A4440;
+  margin-bottom: 48px;
+}
+
+.letter-body p { margin-bottom: 24px; }
+
+.letter-sig {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--dust);
+}
+
+/* ── PRODUCTS ── */
+.products {
+  padding: 120px 0;
+  background: var(--ink);
+  position: relative;
+  overflow: hidden;
+}
+
+.products::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 50% 60% at 70% 40%, rgba(106,140,106,0.08), transparent 60%);
+}
+
+.prod-wrap {
+  max-width: 760px;
+  margin: 0 auto;
+  padding: 0 24px;
+  position: relative;
+}
+
+.prod-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--terra);
+  margin-bottom: 32px;
+}
+
+.prod-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--cream);
+  line-height: 1.2;
+  margin-bottom: 64px;
+  letter-spacing: -1px;
+}
+
+.prod-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+
+@media (max-width: 560px) {
+  .prod-cards { grid-template-columns: 1fr; }
+}
+
+.prod-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 16px;
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+  transition: background 0.2s;
+}
+
+.prod-card:hover { background: rgba(255,255,255,0.07); }
+
+.prod-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--terra), transparent);
+  opacity: 0.4;
+}
+
+.pc-tag {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--terra);
+  margin-bottom: 12px;
+}
+
+.pc-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 22px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--cream);
+  margin-bottom: 8px;
+}
+
+.pc-desc {
+  font-size: 12px;
+  color: rgba(245,240,232,0.45);
+  line-height: 1.7;
+  margin-bottom: 16px;
+  font-weight: 300;
+}
+
+.pc-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 28px;
+  font-weight: 300;
+  color: var(--cream);
+  letter-spacing: -1px;
+}
+
+.pc-price span {
+  font-size: 14px;
+  color: rgba(245,240,232,0.4);
+  font-family: 'DM Mono', monospace;
+  font-style: normal;
+  letter-spacing: 0;
+}
+
+.pc-badge {
+  display: inline-block;
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 2px;
+  padding: 4px 10px;
+  border-radius: 20px;
+  margin-top: 10px;
+}
+
+/* ── FOOTER ── */
+footer {
+  padding: 60px 24px;
+  text-align: center;
+  border-top: 1px solid var(--line);
+}
+
+.footer-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px;
+  font-weight: 300;
+  font-style: italic;
+  color: var(--ink);
+  margin-bottom: 16px;
+  letter-spacing: -1px;
+}
+
+.footer-statement {
+  font-size: 12px;
+  color: var(--muted);
+  font-weight: 300;
+  margin-bottom: 24px;
+}
+
+.footer-sns {
+  display: flex;
+  gap: 24px;
+  justify-content: center;
+}
+
+.footer-sns a {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: var(--muted);
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-sns a:hover { color: var(--ink); }
+
+/* ── SCROLL REVEAL ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (max-width: 640px) {
+  nav { padding: 16px 20px; }
+  .nav-links { display: none; }
+  .step { grid-template-columns: 56px 1fr; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="nuria-logo.png" alt="Nuria" style="height:80px;width:auto;display:block;">
+  </a>
+  <ul class="nav-links">
+    <li><a href="#story">Story</a></li>
+    <li><a href="#how">How it works</a></li>
+    <li><a href="#philosophy">Philosophy</a></li>
+    <li><a href="#products">Products</a></li>
+    <li><a href="nuria-order.html" style="color:var(--terra);">Order</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-eyebrow">About Nuria</div>
+  <h1 class="hero-title">
+    ロボットが始めて、<br>
+    <em>あなたが完成させる。</em>
+  </h1>
+  <div class="hero-rule"></div>
+  <p class="hero-statement">
+    何もしなくていい時代に、あえて手を動かす。<br>
+    それが贅沢かもしれない。
+  </p>
+</section>
+
+<!-- STORY -->
+<section class="story" id="story">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="story-label">Brand Story</div>
+      <h2 class="story-title">
+        AIが何でもできる時代に、<br>
+        手を動かす理由がある。
+      </h2>
+      <div class="story-body">
+        <p>
+          AI関連のニュースや本を読んだり、実際にAIを使ってみると感じることがあります。<strong>AIが人間の仕事を奪っていく怖さがある一方で、AIのおかげで「非効率な時間」を楽しめる余裕が生まれるのかもしれない</strong>、と。
+        </p>
+        <p>
+          効率じゃない時間。生産性ゼロの時間。スマホを置いて、ただ色を選んで、手を動かす時間。それは人間にしかできない贅沢なのかもしれない——そう思ったことが、Nuriaの始まりでした。
+        </p>
+        <p>
+          大切な家族の顔、一緒に過ごしたペット、子供が初めて歩いた瞬間。それを写真として保存するのではなく、<strong>自分の手で絵にして飾る</strong>という体験を届けたい。
+        </p>
+        <p>
+          難しいことはAIとロボットがやっておきました。あとは、ただ楽しんでください。
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote-section">
+  <div class="quote-wrap">
+    <span class="quote-mark reveal">"</span>
+    <p class="quote-text reveal">
+      何もしなくていい時代に、あえて手を動かす。<br>
+      <em>それが贅沢かもしれない。</em>
+    </p>
+    <p class="quote-sub reveal">Nuria — Brand Statement</p>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how" id="how">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="how-label">How it works</div>
+      <h2 class="how-title">
+        写真が届くまで、<br>そして絵になるまで。
+      </h2>
+    </div>
+
+    <div class="steps">
+      <div class="step reveal">
+        <div class="step-num-wrap">
+          <div class="step-num">1</div>
+        </div>
+        <div class="step-content">
+          <div class="step-title">写真とイメージをお送りください</div>
+          <div class="step-body">家族・ペット・子供の写真を3〜5枚と、色のイメージ（パステル・ビビッド・モノトーンなど）をフォームからお送りいただきます。</div>
+          <span class="step-tag" style="background:rgba(184,106,60,0.1);color:var(--terra);">お客さまの作業</span>
+        </div>
+      </div>
+
+      <div class="step reveal">
+        <div class="step-num-wrap">
+          <div class="step-num">2</div>
+        </div>
+        <div class="step-content">
+          <div class="step-title">AIがイラスト化し、3案をご提案</div>
+          <div class="step-body">AIが写真をイラストに変換し、3つのスタイル案をLINEでお送りします。お気に入りの1案をお選びください。「イメージと違う」を事前に防ぐための大切なステップです。</div>
+          <span class="step-tag" style="background:rgba(106,140,106,0.1);color:var(--sage);">Nuriaの作業</span>
+        </div>
+      </div>
+
+      <div class="step reveal">
+        <div class="step-num-wrap">
+          <div class="step-num">3</div>
+        </div>
+        <div class="step-content">
+          <div class="step-title">ロボットが台紙に線と下塗りを描く</div>
+          <div class="step-body">ペンプロッター（ロボット）が実際のクーピーペンシルを持ち、ブランドカラー5色で薄いスケッチ線と下塗りを台紙に描きます。この様子もタイムラプスで収録。</div>
+          <span class="step-tag" style="background:rgba(140,106,90,0.1);color:var(--dust);">ロボットが担当</span>
+        </div>
+      </div>
+
+      <div class="step reveal">
+        <div class="step-num-wrap">
+          <div class="step-num">4</div>
+        </div>
+        <div class="step-content">
+          <div class="step-title">キットがお手元に届きます</div>
+          <div class="step-body">下塗り済みの台紙・AI完成見本・クーピー10色・ガイドシート・ウェルカムカードをクラフト紙の箱に丁寧に梱包してお届けします。</div>
+          <span class="step-tag" style="background:rgba(184,106,60,0.1);color:var(--terra);">発送</span>
+        </div>
+      </div>
+
+      <div class="step reveal">
+        <div class="step-num-wrap">
+          <div class="step-num">5</div>
+        </div>
+        <div class="step-content">
+          <div class="step-title">あなたの手が、絵を完成させる</div>
+          <div class="step-body">ロボットが描いた下地の上に、同じ色のクーピーで濃淡を足していくだけ。消しゴムで消せるので、失敗を恐れず楽しんでください。完成したら、ぜひ飾ってみてください。</div>
+          <span class="step-tag" style="background:rgba(184,106,60,0.1);color:var(--terra);">お客さまが完成させる</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PHILOSOPHY -->
+<section class="philosophy" id="philosophy">
+  <div class="wrap">
+    <div class="reveal">
+      <div class="phil-label">Philosophy</div>
+    </div>
+    <div class="phil-items">
+      <div class="phil-item reveal">
+        <div class="phil-num">1</div>
+        <div class="phil-content">
+          <div class="phil-title">手を動かすことが、豊かさになる時代</div>
+          <div class="phil-body">AIが効率化してくれるからこそ、非効率な時間が価値を持つ。スマホを置いて色を塗る時間は、どんな動画よりも深く記憶に残ると私たちは信じています。</div>
+        </div>
+      </div>
+      <div class="phil-item reveal">
+        <div class="phil-num">2</div>
+        <div class="phil-content">
+          <div class="phil-title">うまくなくていい。自分の手で描けばいい</div>
+          <div class="phil-body">Nuriaの台紙にはロボットがすでに下地を描いています。あなたがやることは、ただ色を重ねるだけ。技術は必要ありません。必要なのは、塗りたいという気持ちだけです。</div>
+        </div>
+      </div>
+      <div class="phil-item reveal">
+        <div class="phil-num">3</div>
+        <div class="phil-content">
+          <div class="phil-title">写真ではなく、絵として飾る</div>
+          <div class="phil-body">同じ家族の顔でも、写真と絵では部屋に与える空気が違います。自分で塗った絵は、世界に一枚だけの作品。それをリビングに飾るとき、その部屋は少し特別な場所になります。</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- LETTER -->
+<section class="letter-section">
+  <div class="wrap">
+    <div class="reveal" style="text-align:center;">
+      <div class="letter-label" style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:5px;text-transform:uppercase;color:var(--terra);margin-bottom:48px;">A letter from Nuria</div>
+      <div style="position:relative;display:inline-block;width:100%;max-width:760px;">
+        <img 
+          src="nuria-letter-v2.png" 
+          alt="A letter from Nuria" 
+          style="width:100%;display:block;border-radius:4px;"
+        >
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" id="products">
+  <div class="prod-wrap">
+    <div class="prod-label reveal">Products</div>
+    <h2 class="prod-title reveal">
+      あなたに合った<br>キットを選んでください。
+    </h2>
+
+    <div class="prod-cards">
+      <a href="nuria-order.html" class="prod-card reveal" style="text-decoration:none;cursor:pointer;display:block;transition:transform 0.2s,box-shadow 0.2s;" onmouseover="this.style.transform='translateY(-4px)';this.style.boxShadow='0 12px 40px rgba(0,0,0,0.12)'" onmouseout="this.style.transform='';this.style.boxShadow=''">
+        <div class="pc-tag">Standard</div>
+        <div class="pc-name">基本キット</div>
+        <div class="pc-desc">家族・ペット・子供の写真を自分で塗る絵に。A4サイズ・クーピー10色・AI完成見本付き。</div>
+        <div class="pc-price">¥6,800<span> 税込・送料込</span></div>
+        <div class="pc-badge" style="background:rgba(184,106,60,0.15);color:var(--terra);">注文する →</div>
+      </a>
+
+      <div class="prod-card reveal">
+        <div class="pc-tag">Wedding</div>
+        <div class="pc-name">結婚式キット</div>
+        <div class="pc-desc">ウェルカムボード＋ウェルカムムービー素材として。A3サイズ・動画納品付き・撮影フレームキット同梱。</div>
+        <div class="pc-price">¥28,000<span> 税込・送料込</span></div>
+        <div class="pc-badge" style="background:rgba(245,240,232,0.06);color:rgba(245,240,232,0.3);">Coming Soon</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <img src="nuria-logo.png" alt="Nuria" style="height:48px;width:auto;">
+  </div>
+  <p class="footer-statement">何もしなくていい時代に、あえて手を動かす。それが贅沢かもしれない。</p>
+  <div class="footer-sns">
+    <a href="https://www.tiktok.com/@nuria.art" target="_blank">TikTok</a>
+    <a href="https://www.instagram.com/nuria.art5/" target="_blank">Instagram</a>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -40px 0px' });
+
+reveals.forEach(el => observer.observe(el));
+
+// Nav active state
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('.nav-links a');
+
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(section => {
+    if (window.scrollY >= section.offsetTop - 100) {
+      current = section.getAttribute('id');
+    }
+  });
+  navLinks.forEach(link => {
+    link.classList.remove('active');
+    if (link.getAttribute('href') === `#${current}`) {
+      link.classList.add('active');
+    }
+  });
+});
+</script>
+</body>
+</html>

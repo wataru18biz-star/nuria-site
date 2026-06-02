@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ご注文 | Nuria</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Noto+Sans+JP:wght@300;400;500&family=DM+Mono:wght@300;400&family=Klee+One:wght@400;600&display=swap');
+
+:root {
+  --cream: #F5F0E8;
+  --warm: #EDE5D8;
+  --paper: #FAF7F2;
+  --ink: #1E1A14;
+  --muted: #8A7E6E;
+  --line: #D8CFC0;
+  --terra: #B86A3C;
+  --sage: #6A8C6A;
+  --dust: #8C7A5A;
+  --bg: #F9F1E3;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--cream);
+  color: var(--ink);
+  font-family: 'Noto Sans JP', sans-serif;
+  line-height: 1.8;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 100;
+  padding: 8px 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #F9F1E3;
+  transition: all 0.3s;
+}
+
+.nav-logo img { height: 80px; width: auto; display: block; }
+.nav-logo { text-decoration: none; }
+
+.nav-links {
+  display: flex; gap: 36px; list-style: none;
+}
+.nav-links a {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase;
+  color: var(--muted); text-decoration: none;
+  transition: color 0.2s;
+}
+.nav-links a:hover { color: var(--ink); }
+
+/* ── WRAP ── */
+.wrap { max-width: 860px; margin: 0 auto; padding: 0 24px; }
+
+/* ── HERO ── */
+.hero {
+  padding: 160px 24px 80px;
+  text-align: center;
+  border-bottom: 1px solid var(--line);
+}
+
+.hero-eye {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px; letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--muted); margin-bottom: 20px;
+  opacity: 0; animation: fadeUp 0.8s ease forwards 0.2s;
+}
+
+.hero-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(36px, 7vw, 64px);
+  font-weight: 300; font-style: italic;
+  line-height: 1.1; letter-spacing: -1px;
+  margin-bottom: 16px;
+  opacity: 0; animation: fadeUp 0.8s ease forwards 0.4s;
+}
+
+.hero-sub {
+  font-size: 13px; color: var(--muted);
+  font-weight: 300; max-width: 480px;
+  margin: 0 auto;
+  opacity: 0; animation: fadeUp 0.8s ease forwards 0.6s;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* ── PRODUCT SECTION ── */
+.product-section { padding: 80px 0 120px; }
+
+.product-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 24px;
+  overflow: hidden;
+  margin-bottom: 16px;
+}
+
+.pc-top {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0;
+}
+
+@media (max-width: 640px) {
+  .pc-top { grid-template-columns: 1fr; }
+}
+
+/* 左：商品イメージ */
+.pc-image {
+  background: var(--warm);
+  min-height: 360px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  border-right: 1px solid var(--line);
+}
+
+.pc-image-inner {
+  text-align: center;
+  padding: 40px;
+}
+
+.kit-visual {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+}
+
+.kit-paper {
+  width: 140px;
+  height: 196px;
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  box-shadow: 4px 4px 20px rgba(0,0,0,0.08);
+}
+
+.kit-paper-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 8px;
+  letter-spacing: 2px;
+  color: var(--muted);
+  text-align: center;
+  line-height: 1.6;
+}
+
+.kit-pencils {
+  display: flex;
+  gap: 4px;
+  margin-top: -8px;
+}
+
+.pencil {
+  width: 8px;
+  height: 48px;
+  border-radius: 2px 2px 1px 1px;
+  position: relative;
+}
+
+.pencil::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  height: 0;
+  border-left: 4px solid transparent;
+  border-right: 4px solid transparent;
+  border-top: 6px solid rgba(0,0,0,0.15);
+}
+
+.pc-badge-wrap {
+  position: absolute;
+  top: 20px; left: 20px;
+}
+
+.pc-badge {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: 3px;
+  text-transform: uppercase;
+  padding: 5px 12px;
+  border-radius: 20px;
+  background: rgba(184,106,60,0.12);
+  color: var(--terra);
+  border: 1px solid rgba(184,106,60,0.2);
+}
+
+/* 右：商品情報 */
+.pc-info {
+  padding: 44px 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.pc-plan {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: 4px;
+  text-transform: uppercase;
+  color: var(--terra); margin-bottom: 10px;
+}
+
+.pc-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 36px; font-weight: 600;
+  font-style: italic; letter-spacing: -1px;
+  margin-bottom: 12px; line-height: 1.1;
+}
+
+.pc-desc {
+  font-size: 13px; color: var(--muted);
+  font-weight: 300; line-height: 1.8;
+  margin-bottom: 28px;
+}
+
+.pc-includes {
+  margin-bottom: 28px;
+}
+
+.pc-includes-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: 3px;
+  color: var(--muted); margin-bottom: 12px;
+}
+
+.include-list { list-style: none; }
+.include-list li {
+  font-size: 12px; color: #666;
+  padding: 6px 0;
+  border-bottom: 1px solid var(--warm);
+  display: flex; gap: 10px; align-items: center;
+  font-weight: 300;
+}
+.include-list li:last-child { border-bottom: none; }
+.include-list li::before {
+  content: '';
+  width: 4px; height: 4px;
+  border-radius: 50%;
+  background: var(--terra);
+  flex-shrink: 0;
+}
+
+.pc-price-wrap {
+  margin-bottom: 24px;
+}
+
+.pc-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px; font-weight: 300;
+  letter-spacing: -2px; line-height: 1;
+}
+
+.pc-price-note {
+  font-size: 11px; color: var(--muted);
+  font-family: 'DM Mono', monospace;
+  margin-top: 4px;
+}
+
+/* ── ORDER BUTTON ── */
+.order-btn {
+  display: block;
+  width: 100%;
+  padding: 18px 24px;
+  background: var(--ink);
+  color: var(--cream);
+  border: none;
+  border-radius: 12px;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: 2px;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  transition: all 0.2s;
+  position: relative;
+  overflow: hidden;
+}
+
+.order-btn::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: rgba(255,255,255,0);
+  transition: background 0.2s;
+}
+
+.order-btn:hover::after {
+  background: rgba(255,255,255,0.05);
+}
+
+.order-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(30,26,20,0.2);
+}
+
+.order-btn-sub {
+  font-size: 10px;
+  color: rgba(245,240,232,0.5);
+  font-family: 'DM Mono', monospace;
+  letter-spacing: 2px;
+  margin-top: 4px;
+}
+
+/* ── FLOW AFTER ORDER ── */
+.flow-section {
+  padding: 80px 0;
+  border-top: 1px solid var(--line);
+}
+
+.flow-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--terra); margin-bottom: 16px;
+}
+
+.flow-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(24px, 4vw, 36px);
+  font-weight: 300; font-style: italic;
+  margin-bottom: 48px; letter-spacing: -0.5px;
+}
+
+.flow-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+@media (max-width: 640px) {
+  .flow-steps { grid-template-columns: 1fr 1fr; }
+}
+
+.flow-step {
+  position: relative;
+}
+
+.flow-step:not(:last-child)::after {
+  content: '→';
+  position: absolute;
+  right: -14px; top: 14px;
+  color: var(--line);
+  font-size: 14px;
+}
+
+@media (max-width: 640px) {
+  .flow-step:nth-child(2)::after { display: none; }
+}
+
+.fs-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px; font-weight: 300;
+  font-style: italic; color: var(--line);
+  line-height: 1; margin-bottom: 8px;
+}
+
+.fs-icon { font-size: 20px; margin-bottom: 8px; }
+
+.fs-title {
+  font-size: 12px; font-weight: 700;
+  margin-bottom: 4px; color: var(--ink);
+}
+
+.fs-body {
+  font-size: 11px; color: var(--muted);
+  line-height: 1.7; font-weight: 300;
+}
+
+/* ── LINE CTA ── */
+.line-section {
+  padding: 80px 0;
+  background: var(--ink);
+  position: relative; overflow: hidden;
+}
+
+.line-section::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 50% at 30% 50%, rgba(184,106,60,0.1), transparent 60%);
+}
+
+.line-inner {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: center;
+  gap: 40px;
+  position: relative;
+}
+
+@media (max-width: 640px) {
+  .line-inner { grid-template-columns: 1fr; text-align: center; }
+}
+
+.line-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: 4px;
+  color: var(--terra); margin-bottom: 12px;
+}
+
+.line-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(22px, 3.5vw, 32px);
+  font-weight: 300; font-style: italic;
+  color: var(--cream); line-height: 1.3;
+  margin-bottom: 10px;
+}
+
+.line-body {
+  font-size: 12px;
+  color: rgba(245,240,232,0.5);
+  font-weight: 300; line-height: 1.8;
+}
+
+.line-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px 28px;
+  background: #06C755;
+  color: white;
+  border-radius: 12px;
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+
+.line-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(6,199,85,0.3);
+}
+
+.line-btn svg {
+  width: 20px; height: 20px;
+}
+
+/* ── FAQ ── */
+.faq-section {
+  padding: 80px 0 120px;
+  border-top: 1px solid var(--line);
+}
+
+.faq-label {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--terra); margin-bottom: 16px;
+}
+
+.faq-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(24px, 4vw, 36px);
+  font-weight: 300; font-style: italic;
+  margin-bottom: 40px;
+}
+
+.faq-list { display: flex; flex-direction: column; gap: 2px; }
+
+.faq-item {
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--paper);
+}
+
+.faq-q {
+  padding: 18px 22px;
+  font-size: 14px; font-weight: 500;
+  cursor: pointer;
+  display: flex; justify-content: space-between;
+  align-items: center;
+  transition: background 0.2s;
+  user-select: none;
+}
+
+.faq-q:hover { background: var(--warm); }
+
+.faq-icon {
+  font-size: 18px; color: var(--terra);
+  transition: transform 0.3s;
+  flex-shrink: 0;
+}
+
+.faq-a {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease, padding 0.3s ease;
+  font-size: 13px; color: var(--muted);
+  font-weight: 300; line-height: 1.8;
+  border-top: 0px solid var(--line);
+}
+
+.faq-item.open .faq-a {
+  max-height: 200px;
+  padding: 16px 22px 20px;
+  border-top: 1px solid var(--line);
+}
+
+.faq-item.open .faq-icon {
+  transform: rotate(45deg);
+}
+
+/* ── OPTION ── */
+.option-section {
+  padding: 0 0 80px;
+}
+
+.opt-title {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: 5px;
+  text-transform: uppercase;
+  color: var(--muted); margin-bottom: 16px;
+}
+
+.opt-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 10px;
+}
+
+@media (max-width: 640px) {
+  .opt-cards { grid-template-columns: 1fr 1fr; }
+}
+
+.opt-card {
+  background: var(--paper);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+}
+
+.opt-timing {
+  font-family: 'DM Mono', monospace;
+  font-size: 8px; letter-spacing: 2px;
+  color: var(--muted); margin-bottom: 6px;
+}
+
+.opt-content {
+  font-size: 12px; font-weight: 500;
+  margin-bottom: 8px; line-height: 1.4;
+}
+
+.opt-price {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 20px; font-weight: 300;
+  color: var(--terra);
+}
+
+/* ── FOOTER ── */
+footer {
+  padding: 48px 24px;
+  text-align: center;
+  border-top: 1px solid var(--line);
+}
+
+.footer-logo {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 32px; font-weight: 300;
+  font-style: italic; margin-bottom: 12px;
+}
+
+.footer-statement {
+  font-size: 11px; color: var(--muted);
+  font-weight: 300; margin-bottom: 20px;
+}
+
+.footer-sns {
+  display: flex; gap: 24px; justify-content: center;
+}
+
+.footer-sns a {
+  font-family: 'DM Mono', monospace;
+  font-size: 9px; letter-spacing: 3px;
+  color: var(--muted); text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-sns a:hover { color: var(--ink); }
+
+/* REVEAL */
+.reveal {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+
+@media (max-width: 640px) {
+  nav { padding: 8px 20px; }
+  .nav-links { display: none; }
+  .pc-info { padding: 28px 24px; }
+  .line-inner { gap: 24px; }
+  .flow-step:not(:last-child)::after { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="nuria-about.html" class="nav-logo">
+    <img src="nuria-logo.png" alt="Nuria">
+  </a>
+  <ul class="nav-links">
+    <li><a href="nuria-about.html">About</a></li>
+    <li><a href="#" style="color:var(--ink);">Order</a></li>
+    <li><a href="#">FAQ</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-eye">Order</div>
+  <h1 class="hero-title">あなただけの絵を、<br>注文する。</h1>
+  <p class="hero-sub">写真を送っていただくだけで、世界に一枚の塗り絵キットをお届けします。</p>
+</section>
+
+<div style="padding: 80px 0 0;">
+<div class="wrap">
+
+<!-- PRODUCT CARD -->
+<div class="product-section" style="padding-top:0;">
+  <div class="product-card reveal">
+    <div class="pc-top">
+
+      <!-- 左：ビジュアル -->
+      <div class="pc-image">
+        <div class="pc-badge-wrap">
+          <span class="pc-badge">Now Available</span>
+        </div>
+        <div class="pc-image-inner">
+          <div class="kit-visual">
+            <div class="kit-paper">
+              <div class="kit-paper-label">A4 線画台紙<br>＋ AI完成見本</div>
+            </div>
+            <div class="kit-pencils">
+              <div class="pencil" style="background:#E8957A;"></div>
+              <div class="pencil" style="background:#8C7A5A;"></div>
+              <div class="pencil" style="background:#6A8C6A;"></div>
+              <div class="pencil" style="background:#7A8C9A;"></div>
+              <div class="pencil" style="background:#E8D4A0;"></div>
+              <div class="pencil" style="background:#C4956A;"></div>
+              <div class="pencil" style="background:#9A7A6A;"></div>
+              <div class="pencil" style="background:#6A7A5A;"></div>
+              <div class="pencil" style="background:#8A9AA8;"></div>
+              <div class="pencil" style="background:#D4C090;"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- 右：情報 -->
+      <div class="pc-info">
+        <div>
+          <div class="pc-plan">Standard Plan</div>
+          <h2 class="pc-name">基本キット</h2>
+          <p class="pc-desc">家族・ペット・子供の写真を<br>自分で塗る絵に。</p>
+
+          <div class="pc-includes">
+            <div class="pc-includes-label">同梱物</div>
+            <ul class="include-list">
+              <li>A4 線画台紙（ロボット描画済み）</li>
+              <li>AI完成見本（フルカラー印刷）</li>
+              <li>クーピーペンシル 10色</li>
+              <li>ガイドシート（塗り方・色番号）</li>
+              <li>ウェルカムカード</li>
+            </ul>
+          </div>
+        </div>
+
+        <div>
+          <div class="pc-price-wrap">
+            <div class="pc-price">¥6,800</div>
+            <div class="pc-price-note">税込・送料込 / レターパックライト</div>
+          </div>
+
+          <a href="#order-form" class="order-btn">
+            注文する
+            <div class="order-btn-sub">写真はLINEでお送りいただけます</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- オプション -->
+  <div class="option-section reveal">
+    <div class="opt-title">台紙追加オプション</div>
+    <div class="opt-cards">
+      <div class="opt-card">
+        <div class="opt-timing">購入時</div>
+        <div class="opt-content">台紙 +1枚</div>
+        <div class="opt-price">+¥400</div>
+      </div>
+      <div class="opt-card">
+        <div class="opt-timing">購入時</div>
+        <div class="opt-content">台紙 +2枚</div>
+        <div class="opt-price">+¥700</div>
+      </div>
+      <div class="opt-card">
+        <div class="opt-timing">後から注文</div>
+        <div class="opt-content">台紙 1枚<br>送料込</div>
+        <div class="opt-price">¥800</div>
+      </div>
+      <div class="opt-card">
+        <div class="opt-timing">後から注文</div>
+        <div class="opt-content">台紙 2枚<br>送料込</div>
+        <div class="opt-price">¥1,300</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- 注文後の流れ -->
+<div class="flow-section reveal">
+  <div class="flow-label">After Order</div>
+  <h2 class="flow-title">注文後の流れ</h2>
+  <div class="flow-steps">
+    <div class="flow-step">
+      <div class="fs-num">1</div>
+      <div class="fs-icon">🛍️</div>
+      <div class="fs-title">注文完了</div>
+      <div class="fs-body">注文後すぐにLINEへのリンクが届きます。友達追加でやりとりがスタート。</div>
+    </div>
+    <div class="flow-step">
+      <div class="fs-num">2</div>
+      <div class="fs-icon">📸</div>
+      <div class="fs-title">写真を送る</div>
+      <div class="fs-body">LINEで写真3〜5枚とイメージをお送りください。</div>
+    </div>
+    <div class="flow-step">
+      <div class="fs-num">3</div>
+      <div class="fs-icon">🖼️</div>
+      <div class="fs-title">3案から選ぶ</div>
+      <div class="fs-body">AIが生成した3つのデザイン案をLINEでお送りします。お好みの1案を選んでください。</div>
+    </div>
+    <div class="flow-step">
+      <div class="fs-num">4</div>
+      <div class="fs-icon">📦</div>
+      <div class="fs-title">キットが届く</div>
+      <div class="fs-body">ロボットが線画を描いた台紙を含むキット一式をお届けします。</div>
+    </div>
+  </div>
+</div>
+
+</div>
+</div>
+
+<!-- LINE CTA -->
+<section class="line-section" id="order-form">
+  <div class="line-inner">
+    <div>
+      <div class="line-label">Order via LINE</div>
+      <h2 class="line-title">LINEで注文・<br>写真のやりとりができます。</h2>
+      <p class="line-body">
+        注文後はLINE公式アカウントで友達追加いただくと、写真の受取・デザイン案の確認・発送連絡をすべてLINEでやりとりできます。
+      </p>
+    </div>
+    <a href="#" class="line-btn">
+      <svg viewBox="0 0 24 24" fill="currentColor">
+        <path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63h2.386c.349 0 .63.285.63.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.070 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/>
+      </svg>
+      LINE で友達追加
+    </a>
+  </div>
+</section>
+
+<!-- FAQ -->
+<div class="wrap">
+<section class="faq-section reveal">
+  <div class="faq-label">FAQ</div>
+  <h2 class="faq-title">よくある質問</h2>
+  <div class="faq-list">
+    <div class="faq-item">
+      <div class="faq-q">どんな写真でも大丈夫ですか？<span class="faq-icon">+</span></div>
+      <div class="faq-a">はい、家族・ペット・子供など幅広く対応しています。顔がはっきり写っていて、なるべく背景がシンプルな写真がきれいに仕上がります。複数枚（3〜5枚）お送りいただけると精度が上がります。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">絵が下手でも大丈夫ですか？<span class="faq-icon">+</span></div>
+      <div class="faq-a">もちろんです。ロボットがすでに下書きと下塗りを済ませています。あとは同じ色のクーピーで濃淡を足すだけなので、絵が苦手な方でも楽しめます。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">注文からどのくらいで届きますか？<span class="faq-icon">+</span></div>
+      <div class="faq-a">写真受取からデザイン確認・制作・発送まで、通常7〜10日程度でお届けしています。繁忙期は多少前後することがあります。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">失敗したらどうなりますか？<span class="faq-icon">+</span></div>
+      <div class="faq-a">台紙の追加注文オプションをご用意しています。購入時に追加するか、後から単体で注文することも可能です。塗り方で迷ったときはLINEでいつでもご相談ください。</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">イメージと違った場合は？<span class="faq-icon">+</span></div>
+      <div class="faq-a">制作前にAIが生成した3つのデザイン案をLINEでお送りし、お好みの案を選んでいただいてから制作します。そのためイメージと大きく異なることはほとんどありません。</div>
+    </div>
+  </div>
+</section>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">
+    <img src="nuria-logo.png" alt="Nuria" style="height:48px;width:auto;">
+  </div>
+  <p class="footer-statement">何もしなくていい時代に、あえて手を動かす。それが贅沢かもしれない。</p>
+  <div class="footer-sns">
+    <a href="https://www.tiktok.com/@nuria.art" target="_blank">TikTok</a>
+    <a href="https://www.instagram.com/nuria.art5/" target="_blank">Instagram</a>
+  </div>
+</footer>
+
+<script>
+// Scroll reveal
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) entry.target.classList.add('visible');
+  });
+}, { threshold: 0.08, rootMargin: '0px 0px -30px 0px' });
+reveals.forEach(el => observer.observe(el));
+
+// FAQ accordion
+document.querySelectorAll('.faq-q').forEach(q => {
+  q.addEventListener('click', () => {
+    const item = q.parentElement;
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>よくある質問 | Nuria</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Noto+Sans+JP:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap');
+:root {
+  --cream: #F5F0E8; --warm: #EDE5D8; --paper: #FAF7F2;
+  --ink: #1E1A14; --muted: #8A7E6E; --line: #D8CFC0;
+  --terra: #B86A3C; --sage: #6A8C6A; --dust: #8C7A5A;
+  --salmon: #E8957A; --bg: #F9F1E3;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--cream); color: var(--ink); font-family: 'Noto Sans JP', sans-serif; line-height: 1.8; overflow-x: hidden; }
+nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; padding: 8px 48px; display: flex; align-items: center; justify-content: space-between; background: #F9F1E3; }
+.nav-logo img { height: 80px; width: auto; display: block; }
+.nav-logo { text-decoration: none; }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.nav-links a:hover, .nav-links a.active { color: var(--ink); }
+.wrap { max-width: 760px; margin: 0 auto; padding: 0 24px; }
+.hero { padding: 160px 24px 60px; text-align: center; border-bottom: 1px solid var(--line); }
+.hero-eye { font-family: 'DM Mono', monospace; font-size: 10px; letter-spacing: 5px; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; opacity:0; animation: fadeUp 0.8s ease forwards 0.2s; }
+.hero-title { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px,7vw,72px); font-weight: 300; font-style: italic; line-height: 1.1; margin-bottom: 20px; opacity:0; animation: fadeUp 0.8s ease forwards 0.4s; }
+.hero-sub { font-size: 13px; color: var(--muted); font-weight: 300; max-width: 480px; margin: 0 auto; line-height: 2; opacity:0; animation: fadeUp 0.8s ease forwards 0.6s; }
+@keyframes fadeUp { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+
+.faq-body { padding: 80px 0 120px; }
+.faq-group { margin-bottom: 64px; }
+.faq-group-title { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 5px; text-transform: uppercase; color: var(--terra); margin-bottom: 24px; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+details { border-bottom: 1px solid var(--line); }
+summary { padding: 20px 0; cursor: pointer; font-size: 14px; font-weight: 400; list-style: none; display: flex; justify-content: space-between; align-items: center; gap: 16px; }
+summary::-webkit-details-marker { display: none; }
+summary::after { content: '+'; font-family: monospace; font-size: 20px; color: var(--terra); flex-shrink: 0; }
+details[open] summary::after { content: '−'; }
+.faq-answer { padding: 0 0 24px; font-size: 13px; color: var(--muted); line-height: 2.1; max-width: 640px; }
+.faq-answer a { color: var(--terra); }
+.faq-answer strong { color: var(--ink); font-weight: 500; }
+
+.contact-box { background: var(--ink); color: var(--cream); padding: 48px; margin: 40px 0; text-align: center; }
+.contact-title { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; font-style: italic; margin-bottom: 12px; }
+.contact-sub { font-size: 13px; color: rgba(245,240,232,0.6); margin-bottom: 28px; line-height: 1.9; }
+.btn-line { display: inline-block; background: #4FAE3B; color: white; padding: 14px 40px; font-family: 'DM Mono', monospace; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; text-decoration: none; border-radius: 2px; }
+
+footer { background: var(--ink); color: var(--muted); padding: 60px 48px 40px; }
+.footer-inner { max-width: 860px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; }
+.footer-brand { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; font-style: italic; color: var(--cream); margin-bottom: 12px; }
+.footer-tagline { font-size: 12px; line-height: 1.9; }
+.footer-col-title { font-family: 'DM Mono', monospace; font-size: 9px; letter-spacing: 3px; text-transform: uppercase; color: var(--cream); margin-bottom: 16px; }
+.footer-links { list-style: none; }
+.footer-links li { margin-bottom: 8px; }
+.footer-links a { font-size: 12px; color: var(--muted); text-decoration: none; transition: color 0.2s; }
+.footer-links a:hover { color: var(--cream); }
+.footer-bottom { max-width: 860px; margin: 40px auto 0; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.08); display: flex; justify-content: space-between; font-size: 10px; font-family: 'DM Mono', monospace; letter-spacing: 1px; }
+@media (max-width: 600px) { nav { padding: 8px 20px; } .nav-links { display: none; } .footer-inner { grid-template-columns: 1fr; } .footer-bottom { flex-direction: column; gap: 8px; } }
+</style>
+</head>
+<body>
+<nav>
+  <a href="nuria-about.html" class="nav-logo"><img src="nuria-logo.png" alt="Nuria"></a>
+  <ul class="nav-links">
+    <li><a href="nuria-about.html">About</a></li>
+    <li><a href="nuria-how-it-works.html">つくり方</a></li>
+    <li><a href="nuria-gallery.html">Gallery</a></li>
+    <li><a href="nuria-faq.html" class="active">FAQ</a></li>
+    <li><a href="nuria-order.html">Order</a></li>
+  </ul>
+</nav>
+
+<section class="hero">
+  <p class="hero-eye">FAQ</p>
+  <h1 class="hero-title">よくある質問</h1>
+  <p class="hero-sub">ここで解決しない場合は、LINEで何でも聞いてください。</p>
+</section>
+
+<div class="wrap">
+  <div class="faq-body">
+
+    <div class="faq-group">
+      <p class="faq-group-title">写真について</p>
+      <details open>
+        <summary>どんな写真でも大丈夫ですか？</summary>
+        <p class="faq-answer">はい、ほとんどの写真に対応しています。人物・ペット・風景など被写体は問いません。<strong>被写体が画面の50〜70%を占める、明るめの写真</strong>が一番きれいに仕上がります。ご不安な場合はLINEでお気軽にご相談ください。事前に確認することができます。</p>
+      </details>
+      <details>
+        <summary>複数の被写体が写っている写真は大丈夫ですか？</summary>
+        <p class="faq-answer">家族写真など複数人・複数匹が写っている写真も対応しています。ただし、被写体が多いほど一人ひとりの描き込みは粗くなります。メインの被写体を1〜2名に絞ると、仕上がりが格段によくなります。</p>
+      </details>
+      <details>
+        <summary>スマホで撮った写真でも大丈夫ですか？</summary>
+        <p class="faq-answer">はい、スマホの写真で十分です。推奨解像度は1,000px以上ですが、最近のスマホであればほぼすべて対応しています。LINEで送る際に「高画質」で送っていただけると安心です。</p>
+      </details>
+      <details>
+        <summary>昔の写真（フィルム・古い印刷物）でも対応できますか？</summary>
+        <p class="faq-answer">対応可能な場合があります。写真をスキャンしてデジタル化していただき、LINEでご相談ください。ただし、解像度が低い場合や色褪せがひどい場合は仕上がりに影響が出ることがあります。</p>
+      </details>
+    </div>
+
+    <div class="faq-group">
+      <p class="faq-group-title">商品・キットについて</p>
+      <details>
+        <summary>初級・基本・上級の違いは何ですか？</summary>
+        <p class="faq-answer">主な違いは<strong>工程の複雑さ・クーピーの本数・所要時間</strong>です。<br><br>
+        初級（¥4,800）：3段階・5色・約30〜60分。お子様や塗り絵初心者に。<br>
+        基本（¥7,500）：5段階・12色・約1〜2時間。最も人気のスタンダード。<br>
+        上級（¥14,800）：7段階・24色・約3〜5時間。塗り絵を楽しみ尽くしたい方に。</p>
+      </details>
+      <details>
+        <summary>台紙の追加オプションはなんのためにありますか？</summary>
+        <p class="faq-answer">主に2つの使い方があります。①<strong>練習・失敗用</strong>として1枚目で練習してから本番を仕上げる。②<strong>複数人で楽しむ</strong>（家族みんなで同じ台紙を塗る体験に）。ギフトとして複数人が楽しめるよう追加する方も多いです。</p>
+      </details>
+      <details>
+        <summary>クーピーペンシルは追加購入できますか？</summary>
+        <p class="faq-answer">Nuria専用の5色は特別な配合で選定しており、市販のサクラクレパス「クーピーペンシル」とは完全には一致しません。近い色番号をLINEでご案内することはできますので、お気軽にご相談ください。</p>
+      </details>
+      <details>
+        <summary>完成見本（AI生成の見本画像）は何のためにありますか？</summary>
+        <p class="faq-answer">塗り絵を完成させる際の「ゴールイメージ」として使います。どこにどの色を塗ればいいか迷ったときの参考にしてください。ただし、あくまでも参考です。自由に色を選んで楽しんでいただくのがNuriaの醍醐味です。</p>
+      </details>
+    </div>
+
+    <div class="faq-group">
+      <p class="faq-group-title">注文・決済について</p>
+      <details>
+        <summary>注文の流れを教えてください。</summary>
+        <p class="faq-answer">①LINEに友達追加 → ②キット選択 → ③写真を送る → ④AIが変換（1〜2分）→ ⑤パターン・枚数を選択 → ⑥決済リンクが届く → ⑦お支払い完了、の流れです。全部LINEで完結します。詳しくは<a href="nuria-how-it-works.html">つくり方ページ</a>をご覧ください。</p>
+      </details>
+      <details>
+        <summary>支払い方法は何が使えますか？</summary>
+        <p class="faq-answer">クレジットカード（VISA / Mastercard / AMEX / JCB）に対応しています。Stripeによる安全な決済です。コンビニ支払い・銀行振込については現在検討中です。</p>
+      </details>
+      <details>
+        <summary>注文後のキャンセル・変更はできますか？</summary>
+        <p class="faq-answer">ロボットが描画を開始する前であれば対応可能です。決済後すぐにLINEでご連絡ください。描画開始後はキャンセルができませんのでご注意ください。</p>
+      </details>
+      <details>
+        <summary>ギフトとして贈ることはできますか？</summary>
+        <p class="faq-answer">はい、ギフト用の梱包（クラフト紙＋リボン+¥300）と、メッセージカード代筆（無料）に対応しています。LINEでご注文の際に「ギフト希望」とお伝えください。贈り先への直接発送も可能です。</p>
+      </details>
+    </div>
+
+    <div class="faq-group">
+      <p class="faq-group-title">発送・配送について</p>
+      <details>
+        <summary>届くまでどのくらいかかりますか？</summary>
+        <p class="faq-answer">決済完了後、通常<strong>3〜5営業日以内</strong>に発送いたします。レターパックライト（日本郵便）での配送となり、発送後2〜3日でお届け予定です。追跡番号はLINEでお知らせします。</p>
+      </details>
+      <details>
+        <summary>配送料はいくらですか？</summary>
+        <p class="faq-answer">全国一律送料込みです。レターパックライトでお届けします。台紙追加オプション（後から追加の場合）は別途送料が発生します（1枚¥800 / 2枚¥1,300 送料込み）。</p>
+      </details>
+      <details>
+        <summary>台紙が折れて届いた場合はどうすればいいですか？</summary>
+        <p class="faq-answer">梱包時に厚紙で補強していますが、万が一破損していた場合はLINEまたはメールでご連絡ください。写真を添えてお送りいただければ、再制作・再送いたします。</p>
+      </details>
+    </div>
+
+    <div class="faq-group">
+      <p class="faq-group-title">塗り方・体験について</p>
+      <details>
+        <summary>塗り絵が苦手でも大丈夫ですか？</summary>
+        <p class="faq-answer">大丈夫です。ロボットが輪郭と下塗りをすでに完成させているので、あなたは色を重ねるだけ。同梱のガイドシートに「どこに何色を」「どの順番で」を全部書いてあります。うまく塗ろうとしなくて大丈夫。ただ色を選んで、手を動かして、その時間を楽しんでください。</p>
+      </details>
+      <details>
+        <summary>子供でも楽しめますか？</summary>
+        <p class="faq-answer">はい！初級キットは小学生でも楽しめる設計です。基本キットは中学生以上、上級キットは大人向けです。親子で一緒に楽しむ場合は、大人が基本キットを塗りながらお子様に教えてあげると良いと思います。</p>
+      </details>
+      <details>
+        <summary>完成した作品はどうすればいいですか？</summary>
+        <p class="faq-answer">そのまま飾るのが一番おすすめです。A4サイズなので100均のフレームにもすっぽり入ります。完成写真をLINEに送ってくれた方には次回使える<strong>¥500クーポン</strong>をプレゼントしています。<a href="#">#nuria_art</a> でSNS投稿もぜひ。</p>
+      </details>
+    </div>
+
+    <div class="contact-box">
+      <h3 class="contact-title">解決しない場合はLINEへ</h3>
+      <p class="contact-sub">どんな小さなことでも、気軽に聞いてください。<br>営業日24時間以内にお返しします。</p>
+      <a href="#" class="btn-line">LINE で質問する</a>
+    </div>
+
+  </div>
+</div>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <div class="footer-brand">Nuria</div>
+      <p class="footer-tagline">何もしなくていい時代に、<br>あえて手を動かす。<br>それが贅沢かもしれない。</p>
+    </div>
+    <div>
+      <p class="footer-col-title">Pages</p>
+      <ul class="footer-links">
+        <li><a href="nuria-about.html">About</a></li>
+        <li><a href="nuria-how-it-works.html">つくり方</a></li>
+        <li><a href="nuria-gallery.html">Gallery</a></li>
+        <li><a href="nuria-faq.html">FAQ</a></li>
+        <li><a href="nuria-order.html">Order</a></li>
+      </ul>
+    </div>
+    <div>
+      <p class="footer-col-title">SNS</p>
+      <ul class="footer-links">
+        <li><a href="#">TikTok @nuria.art</a></li>
+        <li><a href="#">Instagram @nuria.art5</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2025 Nuria. All rights reserved.</span>
+    <span>HAND-CRAFTED WITH ROBOT LOVE</span>
+  </div>
+</footer>
+</body>
+</html>
