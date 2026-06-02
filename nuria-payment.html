@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>お支払い | Nuria</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300&family=Noto+Sans+JP:wght@300;400;500&family=DM+Mono:wght@300;400&display=swap');
+:root {
+  --cream:#F5F0E8;--warm:#EDE5D8;--paper:#FAF7F2;
+  --ink:#1E1A14;--muted:#8A7E6E;--line:#D8CFC0;
+  --terra:#B86A3C;--sage:#6A8C6A;--salmon:#E8957A;--bg:#F9F1E3;
+}
+*{box-sizing:border-box;margin:0;padding:0;}
+body{background:var(--cream);color:var(--ink);font-family:'Noto Sans JP',sans-serif;font-weight:300;min-height:100vh;display:flex;flex-direction:column;}
+
+nav{background:var(--bg);padding:8px 32px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:24px;font-weight:300;font-style:italic;color:var(--ink);text-decoration:none;}
+.nav-secure{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.1em;color:var(--sage);text-transform:uppercase;display:flex;align-items:center;gap:6px;}
+.nav-secure::before{content:'🔒';font-size:11px;}
+
+.main{flex:1;max-width:480px;margin:0 auto;padding:48px 24px;}
+
+/* ORDER SUMMARY */
+.summary{background:white;border:1px solid var(--line);padding:24px;margin-bottom:24px;}
+.summary-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;}
+.summary-item{display:flex;justify-content:space-between;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);font-size:13px;}
+.summary-item:last-child{border-bottom:none;}
+.summary-item .item-name{color:var(--ink);}
+.summary-item .item-price{font-family:'DM Mono',monospace;font-size:12px;color:var(--terra);}
+.summary-total{display:flex;justify-content:space-between;align-items:center;margin-top:16px;padding-top:16px;border-top:2px solid var(--ink);}
+.summary-total .total-label{font-size:14px;font-weight:500;}
+.summary-total .total-price{font-family:'Cormorant Garamond',serif;font-size:28px;font-weight:300;color:var(--terra);}
+
+/* FORM */
+.form-section{background:white;border:1px solid var(--line);padding:24px;margin-bottom:24px;}
+.form-label{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:16px;}
+.field{margin-bottom:16px;}
+.field label{display:block;font-size:11px;color:var(--muted);margin-bottom:6px;font-family:'DM Mono',monospace;letter-spacing:.05em;}
+.field input{width:100%;border:1px solid var(--line);padding:12px 14px;font-size:13px;font-family:'Noto Sans JP',sans-serif;background:var(--bg);color:var(--ink);outline:none;transition:border-color .2s;}
+.field input:focus{border-color:var(--terra);}
+.field input::placeholder{color:var(--line);}
+.field-row{display:grid;grid-template-columns:1fr 1fr;gap:12px;}
+
+/* DUMMY CARD */
+.dummy-notice{background:rgba(184,106,60,.06);border:1px solid rgba(184,106,60,.2);padding:12px 16px;margin-bottom:16px;font-size:11px;color:var(--terra);font-family:'DM Mono',monospace;letter-spacing:.05em;text-align:center;}
+
+/* PAY BUTTON */
+.pay-btn{width:100%;background:var(--ink);color:var(--cream);border:none;padding:18px;font-family:'DM Mono',monospace;font-size:12px;letter-spacing:.15em;text-transform:uppercase;cursor:pointer;transition:background .2s;position:relative;overflow:hidden;}
+.pay-btn:hover{background:var(--terra);}
+.pay-btn:active{transform:scale(.99);}
+.pay-btn.loading{background:var(--muted);cursor:not-allowed;}
+
+/* LOADING OVERLAY */
+.loading-overlay{display:none;position:fixed;inset:0;background:rgba(245,240,232,.95);z-index:100;flex-direction:column;align-items:center;justify-content:center;gap:24px;}
+.loading-overlay.show{display:flex;}
+.spinner{width:40px;height:40px;border:2px solid var(--line);border-top-color:var(--terra);border-radius:50%;animation:spin 0.8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.loading-text{font-family:'DM Mono',monospace;font-size:11px;letter-spacing:.1em;color:var(--muted);text-transform:uppercase;}
+.loading-steps{display:flex;flex-direction:column;gap:8px;margin-top:8px;}
+.loading-step{font-size:11px;color:var(--line);font-family:'DM Mono',monospace;letter-spacing:.05em;transition:color .3s;}
+.loading-step.active{color:var(--terra);}
+.loading-step.done{color:var(--sage);}
+.loading-step.done::before{content:'✓ ';}
+
+.secure-badges{display:flex;gap:16px;justify-content:center;margin-top:16px;}
+.badge{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.08em;color:var(--muted);display:flex;align-items:center;gap:4px;}
+
+footer{padding:24px;text-align:center;font-family:'DM Mono',monospace;font-size:9px;letter-spacing:.08em;color:var(--muted);}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="nuria-about.html" class="nav-logo">Nuria</a>
+  <span class="nav-secure">セキュア決済</span>
+</nav>
+
+<div class="main">
+
+  <!-- ORDER SUMMARY -->
+  <div class="summary">
+    <p class="summary-label">ご注文内容</p>
+    <div class="summary-item">
+      <span class="item-name" id="kit-name">基本キット（A4）</span>
+      <span class="item-price" id="kit-price">¥7,500</span>
+    </div>
+    <div class="summary-item" id="option-row" style="display:none;">
+      <span class="item-name" id="option-name">台紙追加</span>
+      <span class="item-price" id="option-price">¥0</span>
+    </div>
+    <div class="summary-total">
+      <span class="total-label">合計</span>
+      <span class="total-price" id="total-price">¥7,500</span>
+    </div>
+  </div>
+
+  <!-- DUMMY NOTICE -->
+  <div class="dummy-notice">
+    ⚠ DEMO — これはテスト用のダミー決済画面です
+  </div>
+
+  <!-- CARD FORM -->
+  <div class="form-section">
+    <p class="form-label">カード情報</p>
+    <div class="field">
+      <label>カード番号</label>
+      <input type="text" placeholder="4242 4242 4242 4242" maxlength="19" id="card-num">
+    </div>
+    <div class="field-row">
+      <div class="field">
+        <label>有効期限</label>
+        <input type="text" placeholder="MM / YY" maxlength="7" id="card-exp">
+      </div>
+      <div class="field">
+        <label>セキュリティコード</label>
+        <input type="text" placeholder="CVC" maxlength="3" id="card-cvc">
+      </div>
+    </div>
+    <div class="field">
+      <label>カード名義</label>
+      <input type="text" placeholder="TARO YAMADA" id="card-name">
+    </div>
+  </div>
+
+  <button class="pay-btn" id="pay-btn" onclick="startPayment()">
+    決済を完了する
+  </button>
+
+  <div class="secure-badges">
+    <span class="badge">🔒 SSL暗号化通信</span>
+    <span class="badge">💳 Stripe決済</span>
+    <span class="badge">✓ 安全なお支払い</span>
+  </div>
+
+</div>
+
+<!-- LOADING OVERLAY -->
+<div class="loading-overlay" id="loading">
+  <div class="spinner"></div>
+  <div class="loading-text">決済処理中...</div>
+  <div class="loading-steps">
+    <div class="loading-step" id="step1">カード情報を確認しています</div>
+    <div class="loading-step" id="step2">決済を処理しています</div>
+    <div class="loading-step" id="step3">注文を確定しています</div>
+  </div>
+</div>
+
+<footer>© 2025 Nuria. All rights reserved.</footer>
+
+<script>
+// URLパラメータから注文内容を取得
+const params = new URLSearchParams(window.location.search);
+const kit = params.get('kit') || 'basic';
+const paper = params.get('paper') || '1';
+
+const kits = {
+  beginner: { name: '初級キット（A4）', price: 4800 },
+  basic:    { name: '基本キット（A4）', price: 7500 },
+  advanced: { name: '上級キット（A4）', price: 14800 },
+};
+const paperOptions = {
+  '1': { name: null, price: 0 },
+  '2': { name: '台紙 +1枚', price: 400 },
+  '3': { name: '台紙 +2枚', price: 700 },
+};
+
+const kitData = kits[kit] || kits.basic;
+const paperData = paperOptions[paper] || paperOptions['1'];
+const total = kitData.price + paperData.price;
+
+document.getElementById('kit-name').textContent = kitData.name;
+document.getElementById('kit-price').textContent = '¥' + kitData.price.toLocaleString();
+document.getElementById('total-price').textContent = '¥' + total.toLocaleString();
+
+if (paperData.price > 0) {
+  document.getElementById('option-row').style.display = 'flex';
+  document.getElementById('option-name').textContent = paperData.name;
+  document.getElementById('option-price').textContent = '+¥' + paperData.price.toLocaleString();
+}
+
+// カード番号フォーマット
+document.getElementById('card-num').addEventListener('input', function(e) {
+  let v = e.target.value.replace(/\D/g, '').substring(0, 16);
+  e.target.value = v.replace(/(.{4})/g, '$1 ').trim();
+});
+
+document.getElementById('card-exp').addEventListener('input', function(e) {
+  let v = e.target.value.replace(/\D/g, '').substring(0, 4);
+  if (v.length >= 2) v = v.substring(0,2) + ' / ' + v.substring(2);
+  e.target.value = v;
+});
+
+// 決済処理
+function startPayment() {
+  const btn = document.getElementById('pay-btn');
+  btn.classList.add('loading');
+  btn.textContent = '処理中...';
+
+  const overlay = document.getElementById('loading');
+  overlay.classList.add('show');
+
+  const steps = ['step1', 'step2', 'step3'];
+  let i = 0;
+
+  const interval = setInterval(() => {
+    if (i > 0) {
+      document.getElementById(steps[i-1]).classList.remove('active');
+      document.getElementById(steps[i-1]).classList.add('done');
+    }
+    if (i < steps.length) {
+      document.getElementById(steps[i]).classList.add('active');
+      i++;
+    } else {
+      clearInterval(interval);
+      setTimeout(() => {
+        window.location.href = 'nuria-thanks.html';
+      }, 600);
+    }
+  }, 900);
+}
+</script>
+</body>
+</html>
